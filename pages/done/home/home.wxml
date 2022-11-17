@@ -1,0 +1,33 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{false}}">
+  <view slot="backText">返回</view>
+  <view slot="content">考试安排</view>
+</cu-custom>
+
+<!-- <navcpn></navcpn> -->
+
+
+<scroll-view scroll-y class="scrollPage">
+  <view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-title text-orange "></text> 考试安排
+    </view>
+  </view>
+
+  <view class="cu-list menu sm-border card-menu ">
+
+<navigator url="/pages/done/exam/exam" class="cu-item arrow margin-top">
+  <view class="content padding-tb-sm">
+    <view>
+      <text class="cuIcon-lock text-blue margin-right-xs"></text>2022年5月安全生产法考试
+    </view>
+    <view class="text-gray text-sm">
+      <text class="cuIcon-infofill margin-right-xs"></text> 考试时间：2022-10-12 08:00-09:00
+    </view>
+  </view>
+</navigator>
+
+
+
+</view>
+  <view class='cu-tabbar-height'></view>
+</scroll-view>

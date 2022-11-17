@@ -1,0 +1,30 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/todos/home/home",
+        "pages/todos/qes_first/qes_first",
+        "pages/todos/qes_list/qes_list",
+        "pages/todos/qes_index/qes_index",
+        "pages/todos/qes_show/qes_show",
+        "pages/laws/qes_first/qes_first",
+        "pages/laws/qes_show/qes_show",
+        "pages/market/home/home",
+        "pages/market/article_show/article_show",
+        "pages/done/home/home",
+        "pages/done/exam/exam",
+        "pages/speak/home/home",
+        "pages/speak/index/index",
+        "pages/my/home/home",
+        "pages/my/about/about",
+        "pages/my/auth/auth",
+        "pages/todos/notice/notice"
+    ],
+    "window": {
+        "navigationStyle": "custom"
+    },
+    "usingComponents": {
+        "cu-custom": "/colorui/components/cu-custom"
+    },
+    "lazyCodeLoading": "requiredComponents",
+    "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,108 @@
+<cu-custom bgColor="bg-blue" isBack="{{false}}">
+    <view slot="backText">返回</view>
+    <view slot="content">棒棒少儿编程</view>
+</cu-custom>
+
+<scroll-view scroll-y class="scrollPage">
+
+    <!--   <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-orange "></text> 宫格列表
+    </view>
+    <view class="action">
+      <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="gridModal">设置</button>
+    </view>
+  </view> -->
+
+    <!-- <swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+  <swiper-item wx:for="{{swiperList}}"  class="{{cardCur==index?'cur':''}}">
+    <view class="swiper-item">
+      <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+      <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+    </view>
+  </swiper-item>
+</swiper> -->
+    <swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+        <swiper-item wx:for="{{swiperList}}" wx:key="*this">
+            <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+            <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+        </swiper-item>
+    </swiper>
+
+    <!--     <navigator url="{{article_url}}" class="cu-item">
+        <view class="cu-card case">
+            <view class="cu-item shadow">
+                <view class="cu-list menu-avatar">
+                    <view class="cu-item">
+                       <view class="cu-avatar round lg" style="background-image:url(/images/mailopen.png);background-color: white;"></view>
+                        <view class="content flex-sub">
+                            <view class="text-grey">
+                            {{notice}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </navigator> -->
+
+    <view class="bg-white padding margin">
+        <navigator url="{{article_url}}">
+            <text class="cuIcon-notificationfill text-blue text-xl"></text>
+            {{notice}}
+        </navigator>
+    </view>
+
+    <view class="cu-card case">
+        <view class="cu-item shadow " wx:for="{{iconList}}" wx:key="index">
+            <navigator class="image" hover-class='none' url="{{item.url}}">
+                <image src="{{item.logo}}" mode="widthFix"></image>
+                <view class="cu-tag bg-red">最新</view>
+<!--                 <view class="cu-bar bg-shadeBottom">
+                    <text class="text-cut">{{item.name}}</text>
+                </view> -->
+            </navigator>
+        </view>
+    </view>
+
+
+        <!--   <view class="cu-bar bg-white solid-bottom margin-top margin-lr">
+        <view class='action'>
+            <text class='cuIcon-titles text-blue '></text> 在线题库 
+        </view>
+    </view> -->
+        <!--     <view class="padding bg-white">
+        <block wx:for="{{iconList}}" wx:key="index">
+          <view class="flex">
+             <view class="flex-sub bg-grey padding-sm margin-xs radius">1</view>
+             <view class="flex-sub bg-grey padding-sm margin-xs radius">1</view>
+          </view>
+        </block>
+    </view> -->
+
+        <view class="cu-bar bg-white solid-bottom margin-top margin-lr">
+            <view class='action'>
+                <text class='cuIcon-titles text-blue '></text> 在线学习 
+            </view>
+        </view>
+        <view class="cu-card case no-card margin-bottom-xl margin-lr">
+            <view class="cu-item shadow">
+                <view class="cu-list grid col-{{gridCol}} ">
+                    <view class="cu-item" wx:for="{{lawList}}" wx:key="index">
+                        <navigator hover-class='none' url="{{item.url}}">
+                            <view class="cuIcon-{{item.icon}} text-{{item.color}}">
+                            </view>
+                            <text>{{item.name}}</text>
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!--     <view class='nav-list margin-top'>
+        <navigator open-type="navigate" hover-class='none' url="{{item.url}}" class="nav-li bg-{{item.color}}" wx:for="{{iconList}}" wx:key>
+            <view class="nav-title">{{item.title}}</view>
+            <view class="nav-name">{{item.name}}</view>
+            <text class='cuIcon-{{item.icon}}'></text>
+        </navigator>
+    </view> -->
+        <view class='cu-tabbar-height'></view>
+</scroll-view>

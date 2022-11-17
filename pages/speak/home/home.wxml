@@ -1,0 +1,21 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{false}}">
+  <view slot="backText">返回</view>
+  <view slot="content">说呗</view>
+</cu-custom>
+
+<scroll-view scroll-y class="scrollPage">
+<view class="bg-white solid-bottom padding text-center">
+  <text>知识共享</text> 
+  </view>
+
+<view class="padding">
+  <form bindsubmit="bindFormSubmit">
+    <view class="editor-wrap margin-bottom">
+      <textarea value="{{text}}" maxlength="-1" placeholder="好想法、好创意、好知识分享下呗(20个字以上)" name="textarea" class="editor-textarea" />
+    </view>
+    <button form-type="submit" class="cu-btn bg-blue margin-tb-sm lg response shadow-blur">提交</button>
+  </form>
+</view>
+
+<view class='cu-tabbar-height'></view>
+</scroll-view>

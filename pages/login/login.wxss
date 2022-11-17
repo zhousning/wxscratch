@@ -1,0 +1,30 @@
+/* pages/login/login.wxss */
+
+page{
+    background-color: white;
+}
+.weui-label {
+    width: 4.1em
+}
+
+.UCenter-bg {
+    /* background-image: url(https://image.weilanwl.com/color2.0/index.jpg);
+    background-size: cover; */
+    height: 400rpx;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+}
+
+.UCenter-bg text {
+    opacity: 0.8;
+}
+
+.login-copyright {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

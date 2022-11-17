@@ -1,0 +1,9 @@
+/* pages/speak/home/home.wxss */
+.editor-wrap{
+    border: 1px solid darkgray;
+    padding: 10px;
+}
+.editor-textarea {
+    height: 25em;
+    width: 100%;
+}

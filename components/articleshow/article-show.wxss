@@ -1,0 +1,4 @@
+/* components/article_show/article_show.wxss */
+.article-content {
+    background-color: white;
+}

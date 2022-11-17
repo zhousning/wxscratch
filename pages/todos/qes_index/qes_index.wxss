@@ -1,0 +1,4 @@
+/* pages/todos/qes_index/qes_index.wxss */
+page {
+    background-color: #F6F9FE;
+}

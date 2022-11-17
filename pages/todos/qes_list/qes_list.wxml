@@ -1,0 +1,23 @@
+<cu-custom bgColor="bg-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <!--  <view slot="content">{{header_title}}</view> -->
+</cu-custom>
+
+<scroll-view scroll-y class="scrollPage">
+    <view class=" padding-tb-xl bg-blue radius-header" style="height: 300rpx;">
+        <view class="padding-xl text-white">
+            <view class="padding-xs qes-ctn-header">
+                {{header_title}}
+            </view>
+        </view>
+    </view>
+    <view class="cu-list menu card-menu margin-bottom-xl shadow-lg qes-ctn-list ">
+        <view class="cu-item arrow" wx:for="{{iconList}}" wx:key>
+            <navigator open-type="navigate" hover-class='none' url="{{item.url}}" class="content margin-tb-xl">
+                <text class="cuIcon-choiceness text-blue"></text>
+                <text class="text-black text-lg"> {{item.name}}</text>
+            </navigator>
+        </view>
+    </view>
+    <view class='cu-tabbar-height'></view>
+</scroll-view>

@@ -1,0 +1,109 @@
+<cu-custom bgColor="bg-blue" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">
+    <text wx:if="{{questions[current].type == '0'}}" class=" text-white">单选题</text>
+    <text wx:if="{{questions[current].type == '1'}}" class=" text-white">多选题</text>
+    <text wx:if="{{questions[current].type == '2'}}" class=" text-white">判断题</text>
+  </view>
+</cu-custom>
+
+
+<scroll-view scroll-y class="scrollPage">
+  <view class="cu-bar bg-white solid-bottom flex justify-between padding-right">
+    <view class="action">
+      <text class="cuIcon-searchlist lg text-blue" bindtap="showModal" data-target="Modal">纠错</text>
+    </view>
+    <view class="action ">
+      <text class="cuIcon-calendar lg text-blue" bindtap="showModal" data-target="bottomModal">答题卡</text>
+    </view>
+  </view>
+
+  <view class="cu-modal {{modalName=='Modal'?'show':''}}">
+    <view class="cu-dialog bg-white">
+      <form bindsubmit="bindFormSubmit">
+        <view class="cu-bar bg-white">
+          <view class="action">
+            <button bindtap="cancelCorrect" class="cu-btn bg-green shadow-blur">取消</button>
+          </view>
+          <view class="action">
+            <button form-type="submit" class="cu-btn bg-blue shadow-blur">提交</button>
+          </view>
+        </view>
+        <view class="padding">
+          <view class="editor-wrap margin-bottom">
+            <textarea value="{{text}}" maxlength="-1" placeholder="问题描述(20个字以上)" name="textarea" class="editor-textarea" />
+          </view>
+        </view>
+      </form>
+    </view>
+  </view>
+
+  <view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white">
+        <view class="action text-green" bindtap="cancelAnsSheet">取消</view>
+        <view class="action text-blue" bindtap="confirmAnsSheet">确定</view>
+      </view>
+
+      <view class="bg-white padding">
+        <scroll-view scroll-y class="scrollPage" style="height: 600rpx;">
+          <view class="cu-list grid col-5 ">
+            <view wx:for="{{questions}}" wx:key class="{{item.choose ? 'cu-item bg-blue' : 'cu-item'}}" data-target='{{index}}' bindtap="choose_qesnum">
+              <view class="{{item.choose ? 'text-white' : ''}}">{{index+1}}</view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+
+
+
+  <view class="cu-bar bg-white">
+    <view class="weui-cell__bd margin text-lg text-content">
+
+      <rich-text style="display: inline-block;" nodes="{{questions[current].title}}"></rich-text>
+    </view>
+  </view>
+
+  <radio-group wx:if="{{questions[current].type != '1'}}" bindchange="radioChange" class="cu-list menu sm-border card-menu margin">
+    <view class="cu-item margin-top {{item.answer_true ? 'text-green' : ''}} {{item.answer_false ? 'text-red' : ''}}" wx:for="{{questions[current].options}}" wx:key="{{item.id}}">
+      <label class="action content ">
+
+        <rich-text nodes="{{item.content}}">
+          <radio class="margin-right-sm blue sm radio" value="{{item.value}}" checked="{{item.checked}}"></radio>
+        </rich-text>
+      </label>
+    </view>
+  </radio-group>
+
+  <checkbox-group wx:if="{{questions[current].type == '1'}}" bindchange="checkboxChange" class="cu-list menu sm-border card-menu margin">
+    <view class="cu-item margin-top {{item.answer_true ? 'text-green' : ''}} {{item.answer_false ? 'text-red' : ''}}" wx:for="{{questions[current].options}}" wx:key="{{item.id}}">
+      <label class="action content ">
+
+        <rich-text nodes="{{item.content}}">
+          <checkbox class="margin-right-sm blue sm" value="{{item.value}}" checked="{{item.checked}}"></checkbox>
+        </rich-text>
+      </label>
+    </view>
+  </checkbox-group>
+
+  <view class="margin" wx:if="{{questions[current].type == '3'}}">
+    <button bindtap="showTrueAnswer" class="bg-green margin-bottom">正确答案</button>
+    <rich-text hidden="{{hiddenTrueAnswer}}" nodes="{{questions[current].answer}}"></rich-text>
+  </view>
+
+  <view class="margin">
+    <button bindtap="showAnalyse" class="bg-blue margin-bottom">解析</button>
+    <rich-text hidden="{{hiddenAnalyse}}" nodes="{{questions[current].analyse}}"></rich-text>
+  </view>
+
+  <view class='cu-tabbar-height'></view>
+</scroll-view>
+
+<view class="box padding-top cu-bar tabbar foot">
+  <view class="cu-bar btn-group">
+    <button class="cu-btn bg-blue shadow-blur round" bindtap="previousQes" disabled="{{previous_disabled}}">上一题</button>
+    <button class="cu-btn bg-blue shadow-blur round" bindtap="nextQes" disabled="{{next_disabled}}">下一题</button>
+  </view>
+</view>

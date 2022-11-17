@@ -1,0 +1,20 @@
+<cu-custom bgColor="bg-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">题目</view>
+</cu-custom>
+
+<view class="grid col-2 padding-sm">
+    <block wx:for="{{qes_type}}">
+        <view class="padding-sm">
+            <navigator url="{{item.count == 0 ? '#' : item.url}}">
+                <view class="bg-white padding radius text-center shadow-blur">
+                    <view style="background-image:url(../../../images/{{item.icon}});" class="cu-avatar xl bg-white">
+                    </view>
+                    <view class="margin-top-sm text-Abc">
+                        <text class="text-lg">{{item.title}} ({{item.count}})</text>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+    </block>
+</view>

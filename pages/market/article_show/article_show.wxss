@@ -1,0 +1,5 @@
+/* pages/market/article_show/article_show.wxss */
+
+page {
+    background-color: white;
+}

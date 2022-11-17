@@ -1,0 +1,57 @@
+<cu-custom bgColor="bg-blue" isBack="{{true}}">
+  <view slot="backText"></view>
+  <view slot="content">答题</view>
+</cu-custom>
+
+<scroll-view scroll-y class="scrollPage">
+  <view class="cu-bar bg-white solid-bottom flex justify-between padding-right">
+    <view class="action ">
+      <text class="cuIcon-title text-red ">剩余时间：{{wxTimer}}</text> 
+    </view>
+    <view>
+      <button bindtap="hand_paper" class="cu-btn bg-blue shadow-blur ">交卷</button>
+    </view>
+  </view>
+
+  <view class="cu-bar bg-white">
+    <view class="weui-cell__bd margin text-lg text-content">
+      <text wx:if="{{questions[current].type == '0'}}" class=" text-blue marin">[单选题]</text>
+      <text wx:if="{{questions[current].type == '1'}}" class=" text-blue marin">[多选题]</text>
+      <text wx:if="{{questions[current].type == '2'}}" class=" text-blue marin">[判断题]</text>
+      <text>{{questions[current].title}}</text>
+    </view>
+  </view>
+
+  <radio-group wx:if="{{questions[current].type != '1'}}" bindchange="radioChange"  class="cu-list menu sm-border card-menu margin">
+    <view class="cu-item margin-top" wx:for="{{questions[current].options}}" wx:key="{{item.id}}">
+      <label class="action content ">
+        <radio class="margin-right-sm blue sm radio" value="{{item.value}}" checked="{{item.checked}}"></radio>
+        <!-- <radio class="margin-right-sm blue sm radio" value="{{item.value}}" checked="{{answer == item.value}}"></radio> -->
+        <text >{{item.value + ' ' + item.content}}</text>
+      </label>
+    </view>
+  </radio-group>
+
+<!--todos checkbox选中后的响应状态需要再改-->
+  <checkbox-group wx:if="{{questions[current].type == '1'}}" bindchange="checkboxChange"   class="cu-list menu sm-border card-menu margin">
+    <view class="cu-item margin-top" wx:for="{{questions[current].options}}" wx:key="{{item.id}}">
+      <label class="action content ">
+        <checkbox class="margin-right-sm blue sm" value="{{item.value}}" checked="{{item.checked}}"></checkbox>
+        <text>{{item.value + ' ' + item.content  }}</text>
+      </label>
+    </view>
+  </checkbox-group>
+
+  <!-- <view class="margin">
+    <button bindtap="showTrueAnswer" class="bg-green margin-bottom">正确答案</button> 
+    <text hidden="{{hiddenTrueAnswer}}" class="text-lg text-blue ">正确答案：{{questions[current].answer}}</text>
+  </view>-->
+  <view class='cu-tabbar-height'></view>
+</scroll-view>
+
+<view class="box padding-top cu-bar tabbar foot">
+  <view class="cu-bar btn-group">
+    <button class="cu-btn bg-blue shadow-blur round" bindtap="previousQes" disabled="{{previous_disabled}}">上一题</button>
+    <button class="cu-btn bg-blue shadow-blur round" bindtap="nextQes" disabled="{{next_disabled}}">下一题</button>
+  </view>
+</view>

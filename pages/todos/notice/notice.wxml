@@ -1,0 +1,7 @@
+<!--pages/todos/notice/notice.wxml-->
+
+<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">{{article.title}}</view>
+</cu-custom>
+<article-show url="{{article_url}}"></article-show>

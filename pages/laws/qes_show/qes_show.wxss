@@ -1,0 +1,10 @@
+/* pages/todos/qes_show/qes_show.wxss */
+.editor-wrap{
+    border: 1px solid darkgray;
+    padding: 10px;
+}
+.editor-textarea {
+    height: 15em;
+    width: 100%;
+    text-align: left;
+}

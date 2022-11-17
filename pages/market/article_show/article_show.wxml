@@ -1,0 +1,28 @@
+<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">{{article.title}}</view>
+</cu-custom>
+<scroll-view scroll-y class="scrollPage">
+    <view>
+        <view class="padding-xs flex align-center">
+            <view class="flex-sub text-center">
+                <view class="text-xl padding-top padding-lr">
+                    <text class="text-black text-bold">{{article.title}}</text>
+                </view>
+                <view class="padding text-gray">{{article.dept}} {{article.date}}</view>
+            </view>
+        </view>
+        <view class="padding-lr text-content article-content text-lg">
+            <rich-text nodes="{{article.content}}"></rich-text>
+        </view> 
+    </view>
+
+    <view class="padding flex justify-center">
+        <image style="width:100%;" mode="widthFix" src="/images/gykgwx.jpg" >
+       </image>
+    </view>
+
+    <view class='cu-tabbar-height padding bg-gray  text-center'>
+        <text >厚德为公 惠泽民生</text>
+    </view>
+</scroll-view>
