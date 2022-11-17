@@ -18,11 +18,14 @@ Page({
         hiddenAnalyse: true,
         modalName: '',
         text: '', //纠错弹出框
+        count: 0,
+        qes_title: '',
+        qes_type: '',
+        qes_options: [],
+        select_qesnum: 0,
     },
     radioChange(e) {
-        let current = this.data.current
-        let questions = this.data.questions
-        let items = questions[current].options
+        let items = this.data.qes_options
         for (let i = 0, len = items.length; i < len; ++i) {
             if (items[i].value === e.detail.value) {
                 items[i].checked = true
@@ -36,9 +39,8 @@ Page({
             }
         }
 
-        let options = 'questions[' + current + '].options'
         this.setData({
-            [options]: items
+            qes_options: items
         })
     },
     checkboxChange(e) {
@@ -77,16 +79,16 @@ Page({
         })
     },
     previousQes: function () {
-        var val = this.data.current - 1
+        var current = this.data.current - 1
         this.setData({
             next_disabled: false,
             answer: '',
-            current: val,
+            current: current,
             myAnswer: '',
             hiddenAnalyse: true,
-            hiddenTrueAnswer: true
+            hiddenTrueAnswer: true,
         })
-        if (val == 0) {
+        if (current == 0) {
             this.setData({
                 previous_disabled: true
             })
@@ -95,19 +97,20 @@ Page({
                 previous_disabled: false
             })
         }
+        set_question(that)
     },
     nextQes: function () {
-        var val = this.data.current + 1
-        var qes = this.data.questions
+        var current = this.data.current + 1
+        var count = this.data.count 
         this.setData({
             previous_disabled: false,
             answer: '',
-            current: val,
+            current: current,
             myAnswer: '',
             hiddenAnalyse: true,
-            hiddenTrueAnswer: true
+            hiddenTrueAnswer: true,
         })
-        if (val == qes.length - 1) {
+        if (current == count - 1) {
             this.setData({
                 next_disabled: true
             })
@@ -116,6 +119,7 @@ Page({
                 next_disabled: false
             })
         }
+        set_question(that)
     },
     //点击弹出模态框
     showModal(e) {
@@ -125,69 +129,55 @@ Page({
     },
     //答题卡取消按钮
     cancelAnsSheet(e) {
-        var questions = this.data.questions
-        for (var i = 0; i < questions.length; i++) {
-            questions[i].choose = false;
-        }
         this.setData({
             modalName: null,
-            questions: questions
         })
     },
     //答题卡确定按钮
     confirmAnsSheet(e) {
-        var questions = this.data.questions
-        var val = null
-        var flag = false
-        for (var i = 0; i < questions.length; i++) {
-            if (questions[i].choose) {
-                val = i;
-                flag = true;
-                break;
-            }
-        }
-        if (flag) {
-            for (var i = 0; i < questions.length; i++) {
-                questions[i].choose = false;
-            }
-            var previous_disabled = true
-            var next_disabled = true
-            if (val == 0) {
-                previous_disabled = true
-            } else {
-                previous_disabled = false
-            }
-            if (val == questions.length - 1) {
-                next_disabled = true
-            } else {
-                next_disabled = false
-            }
-            this.setData({
-                modalName: null,
-                current: val,
-                questions: questions,
-                previous_disabled: previous_disabled,
-                next_disabled: next_disabled
-            })
+        var current = this.data.select_qesnum
+        var count = this.data.count
+        var previous_disabled = true
+        var next_disabled = true
+        if (current == 0) {
+            previous_disabled = true
         } else {
-            this.setData({
-                modalName: null
-            })
+            previous_disabled = false
         }
+        if (current == count - 1) {
+            next_disabled = true
+        } else {
+            next_disabled = false
+        }
+        this.setData({
+            modalName: null,
+            current: current,
+            previous_disabled: previous_disabled,
+            next_disabled: next_disabled,
+        })
+        set_question(that)
+    },
+    set_question(that) {
+        var current = that.data.current
+        var questions = wx.getStorageSync('questions')
+        var qes_title = questions[current].title
+        var qes_type = questions[current].type
+        var qes_answer = questions[current].answer
+        var qes_analyse = questions[current].analyse
+        var qes_options = questions[current].options
+        that.setData({
+            qes_title: qes_title,
+            qes_type: qes_type,
+            qes_answer: qes_answer,
+            qes_analyse: qes_analyse,
+            qes_options: qes_options
+        })
     },
     //选择编号显示绿色背景
     choose_qesnum(e) {
         var val = e.currentTarget.dataset.target
-        var questions = this.data.questions
-        for (var i = 0; i < questions.length; i++) {
-            if (i == val) {
-                questions[i].choose = true;
-            } else {
-                questions[i].choose = false;
-            }
-        }
         this.setData({
-            questions: questions
+            select_qesnum: val 
         })
     },
     onLoad: function (options) {
@@ -195,6 +185,7 @@ Page({
         var openid = wx.getStorageSync('openId');
         var qes_lib = options.qes_lib;
         var type = options.type
+        var current= that.data.current
 
         wx.showLoading({
             title: '数据加载中',
@@ -210,11 +201,15 @@ Page({
                 openid: openid
             },
             success: function (res) {
-                var objs = res.data;
+                var questions = res.data;
 
+                wx.setStorageSync('questions', questions)
                 that.setData({
-                    next_disabled: objs.length <= 1 ? true : false, 
-                    questions: objs
+                    next_disabled: questions.length <= 1 ? true : false, 
+                    count: questions.length,
+                    qes_title: questions[current].title,
+                    qes_type: questions[current].type,
+                    qes_options: questions[current].options
                 })
                 wx.hideLoading();
             },

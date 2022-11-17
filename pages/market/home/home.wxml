@@ -9,7 +9,7 @@
         <navigator wx:for="{{articles}}" url="{{item.url}}" class="cu-item">
             <view class="content padding-0 padding-tb">
                 <text class="text-black">{{item.title}}</text>
-                <view><text class="text-gray text-cut">{{item.department}} {{item.date}}</text></view>
+             <!--    <view><text class="text-gray text-cut">{{item.department}} {{item.date}}</text></view> -->
             </view>
         </navigator>
 
