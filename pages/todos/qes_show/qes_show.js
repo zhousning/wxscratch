@@ -162,17 +162,27 @@ Page({
         var that = this;
         var current = that.data.current
         var questions = wx.getStorageSync('questions')
-        var qes_title = questions[current].title
+        var qes_title = questions[current].title.replaceAll("src='", "src='" + app.globalData.config.routes.nhost)
         var qes_type = questions[current].type
-        var qes_answer = questions[current].answer
-        var qes_analyse = questions[current].analyse
-        var qes_options = questions[current].options
+        var qes_answer = questions[current].answer.replaceAll("src='", "src='" + app.globalData.config.routes.nhost)
+        var qes_analyse = questions[current].analyse.replaceAll("src='", "src='" + app.globalData.config.routes.nhost)
+
+        var options = questions[current].options
+        var option_arr = []
+        for(var i=0; i < options.length; i++) {
+            option_arr.push({
+                id: options[i].id, 
+                value: options[i].value, 
+                content: options[i].content.replaceAll("src='", "src='" + app.globalData.config.routes.nhost), 
+                true_answer: options[i].true_answer 
+            })
+        }
         that.setData({
             qes_title: qes_title,
             qes_type: qes_type,
             qes_answer: qes_answer,
             qes_analyse: qes_analyse,
-            qes_options: qes_options
+            qes_options: option_arr
         })
     },
     //选择编号显示绿色背景
@@ -206,14 +216,24 @@ Page({
                 var questions = res.data;
 
                 wx.setStorageSync('questions', questions)
+                var options = questions[current].options
+                var option_arr = []
+                for(var i=0; i < options.length; i++) {
+                    option_arr.push({
+                        id: options[i].id, 
+                        value: options[i].value, 
+                        content: options[i].content.replaceAll("src='", "src='" + app.globalData.config.routes.nhost), 
+                        true_answer: options[i].true_answer 
+                    })
+                }
                 that.setData({
                     next_disabled: questions.length <= 1 ? true : false, 
                     count: questions.length,
-                    qes_title: questions[current].title,
+                    qes_title: questions[current].title.replaceAll("src='", "src='" + app.globalData.config.routes.nhost),
                     qes_type: questions[current].type,
-                    qes_answer: questions[current].answer,
-                    qes_analyse: questions[current].analyse,
-                    qes_options: questions[current].options
+                    qes_answer: questions[current].answer.replaceAll("src='", "src='" + app.globalData.config.routes.nhost),
+                    qes_analyse: questions[current].analyse.replaceAll("src='", "src='" + app.globalData.config.routes.nhost),
+                    qes_options: option_arr 
                 })
                 wx.hideLoading();
             },
