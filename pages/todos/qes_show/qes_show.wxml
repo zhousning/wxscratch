@@ -66,8 +66,8 @@
     </view>
   </view>
 
-  <radio-group wx:if="{{qes_type != '1'}}" bindchange="radioChange" class="cu-list menu sm-border card-menu margin">
-    <view class="cu-item margin-top {{item.answer_true ? 'text-green' : ''}} {{item.answer_false ? 'text-red' : ''}}" wx:for="{{qes_options}}" wx:key="{{item.id}}">
+  <radio-group wx:if="{{qes_type != '1'}}" bindchange="radioChange" class="cu-list block sm-border  margin-0 padding bg-white">
+    <view class="padding-sm margin-top {{item.answer_true ? 'bg-green' : ''}} {{item.answer_false ? 'bg-red' : ''}}" wx:for="{{qes_options}}" wx:key="{{item.id}}">
       <label class="action content ">
 
         <rich-text nodes="{{item.content}}">
@@ -77,26 +77,8 @@
     </view>
   </radio-group>
 
-
-<!--   <view class="cu-bar bg-white">
-    <view class="weui-cell__bd margin text-lg text-content">
-
-      <rich-text style="display: inline-block;" nodes="{{questions[current].title}}"></rich-text>
-    </view>
-  </view>
-  <radio-group wx:if="{{questions[current].type != '1'}}" bindchange="radioChange" class="cu-list menu sm-border card-menu margin">
-    <view class="cu-item margin-top {{item.answer_true ? 'text-green' : ''}} {{item.answer_false ? 'text-red' : ''}}" wx:for="{{questions[current].options}}" wx:key="{{item.id}}">
-      <label class="action content ">
-
-        <rich-text nodes="{{item.content}}">
-          <radio class="margin-right-sm blue sm radio" value="{{item.value}}" checked="{{item.checked}}"></radio>
-        </rich-text>
-      </label>
-    </view>
-  </radio-group> -->
-
-  <checkbox-group wx:if="{{questions[current].type == '1'}}" bindchange="checkboxChange" class="cu-list menu sm-border card-menu margin">
-    <view class="cu-item margin-top {{item.answer_true ? 'text-green' : ''}} {{item.answer_false ? 'text-red' : ''}}" wx:for="{{questions[current].options}}" wx:key="{{item.id}}">
+  <checkbox-group wx:if="{{qes_type == '1'}}" bindchange="checkboxChange" class="cu-list block sm-border  margin-0 padding bg-white">
+    <view class="padding-sm  margin-top {{item.answer_true ? 'bg-green' : ''}} {{item.answer_false ? 'bg-red' : ''}}" wx:for="{{qes_options}}" wx:key="{{item.id}}">
       <label class="action content ">
 
         <rich-text nodes="{{item.content}}">
@@ -106,12 +88,12 @@
     </view>
   </checkbox-group>
 
-  <view class="margin" wx:if="{{qes_type == '3'}}">
+  <view class="margin" wx:if="{{qes_type == '3'}}" hidden="{{qes_answer == '' || qes_answer == '无' ||  !qes_answer}}">
     <button bindtap="showTrueAnswer" class="bg-green margin-bottom">正确答案</button>
     <rich-text hidden="{{hiddenTrueAnswer}}" nodes="{{qes_answer}}"></rich-text>
   </view>
 
-  <view class="margin">
+  <view class="margin" hidden="{{qes_analyse == '' || qes_analyse == '无' ||  !qes_analyse}}">
     <button bindtap="showAnalyse" class="bg-blue margin-bottom">解析</button>
     <rich-text hidden="{{hiddenAnalyse}}" nodes="{{qes_analyse}}"></rich-text>
   </view>

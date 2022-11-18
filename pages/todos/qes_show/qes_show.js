@@ -44,9 +44,7 @@ Page({
         })
     },
     checkboxChange(e) {
-        let current = this.data.current
-        let questions = this.data.questions
-        let items = questions[current].options
+        let items = this.data.qes_options
         const values = e.detail.value
         for (let i = 0, lenI = items.length; i < lenI; ++i) {
             items[i].checked = false
@@ -63,9 +61,8 @@ Page({
                 }
             }
         }
-        let options = 'questions[' + current + '].options'
         this.setData({
-            [options]: items
+            qes_options: items
         })
     },
     showTrueAnswer: function () {
@@ -79,8 +76,9 @@ Page({
         })
     },
     previousQes: function () {
-        var current = this.data.current - 1
-        this.setData({
+        var that = this;
+        var current = that.data.current - 1
+        that.setData({
             next_disabled: false,
             answer: '',
             current: current,
@@ -89,20 +87,21 @@ Page({
             hiddenTrueAnswer: true,
         })
         if (current == 0) {
-            this.setData({
+            that.setData({
                 previous_disabled: true
             })
         } else {
-            this.setData({
+            that.setData({
                 previous_disabled: false
             })
         }
-        set_question(that)
+        that.set_question()
     },
     nextQes: function () {
-        var current = this.data.current + 1
-        var count = this.data.count 
-        this.setData({
+        var that = this;
+        var current = that.data.current + 1
+        var count = that.data.count 
+        that.setData({
             previous_disabled: false,
             answer: '',
             current: current,
@@ -111,19 +110,20 @@ Page({
             hiddenTrueAnswer: true,
         })
         if (current == count - 1) {
-            this.setData({
+            that.setData({
                 next_disabled: true
             })
         } else {
-            this.setData({
+            that.setData({
                 next_disabled: false
             })
         }
-        set_question(that)
+        that.set_question()
     },
     //点击弹出模态框
     showModal(e) {
         this.setData({
+            select_qesnum: this.data.current,
             modalName: e.currentTarget.dataset.target
         })
     },
@@ -135,8 +135,9 @@ Page({
     },
     //答题卡确定按钮
     confirmAnsSheet(e) {
-        var current = this.data.select_qesnum
-        var count = this.data.count
+        var that = this;
+        var current = that.data.select_qesnum
+        var count = that.data.count
         var previous_disabled = true
         var next_disabled = true
         if (current == 0) {
@@ -149,15 +150,16 @@ Page({
         } else {
             next_disabled = false
         }
-        this.setData({
+        that.setData({
             modalName: null,
             current: current,
             previous_disabled: previous_disabled,
             next_disabled: next_disabled,
         })
-        set_question(that)
+        that.set_question()
     },
-    set_question(that) {
+    set_question() {
+        var that = this;
         var current = that.data.current
         var questions = wx.getStorageSync('questions')
         var qes_title = questions[current].title
@@ -209,6 +211,8 @@ Page({
                     count: questions.length,
                     qes_title: questions[current].title,
                     qes_type: questions[current].type,
+                    qes_answer: questions[current].answer,
+                    qes_analyse: questions[current].analyse,
                     qes_options: questions[current].options
                 })
                 wx.hideLoading();
