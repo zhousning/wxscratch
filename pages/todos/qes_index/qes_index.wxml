@@ -8,8 +8,7 @@
         <view class="padding-sm">
             <navigator url="{{item.count == 0 ? '#' : item.url}}">
                 <view class="bg-white padding radius text-center shadow-blur">
-                    <view style="background-image:url(../../../images/{{item.icon}});" class="cu-avatar xl bg-white">
-                    </view>
+                    <image src="/images/{{item.icon}}" class="cu-avatar xl bg-white"></image>
                     <view class="margin-top-sm text-Abc">
                         <text class="text-lg">{{item.title}} ({{item.count}})</text>
                     </view>
