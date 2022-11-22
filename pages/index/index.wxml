@@ -40,7 +40,7 @@
     <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/market{{PageCur=='market'?'_cur':''}}.png"></image>
     </view>
-    <view class="{{PageCur=='market'?'text-blue':'text-gray'}}">编程园地</view>
+    <view class="{{PageCur=='market'?'text-blue':'text-gray'}}">考级宝典</view>
   </view>
 
   <view class="action" bindtap="NavChange" data-cur="my">

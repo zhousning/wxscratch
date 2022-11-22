@@ -167,13 +167,12 @@ App({
     },
     createShareMessage: function () {
         var message = {
-            title: '山东公用水务集团生产运营智能平台',
-            imageUrl: './images/swjtlogo.png',
-            path: 'index/index'
+            title: '少儿编程考级宝典-考级必备',
+            imageUrl: config.routes.host + '/share.jpg',
+            path: 'pages/index/index'
         }
         return message;
-    }
-
+    },
     /* onLaunch() {
         var that = this;
         // 展示本地存储能力

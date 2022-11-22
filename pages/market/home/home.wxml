@@ -1,18 +1,25 @@
 <cu-custom bgColor="bg-gradual-pink" isBack="{{false}}">
     <view slot="backText">返回</view>
-    <view slot="content">学习在线</view>
+    <view slot="content">考级宝典</view>
 </cu-custom>
 
-<scroll-view scroll-y class="scrollPage bg-white">
-    <view class="cu-list menu card-menu ">
 
-        <navigator wx:for="{{articles}}" url="{{item.url}}" class="cu-item">
-            <view class="content padding-0 padding-tb">
-                <text class="text-black">{{item.title}}</text>
-             <!--    <view><text class="text-gray text-cut">{{item.department}} {{item.date}}</text></view> -->
+<navigator wx:for="{{articles}}" url="{{item.url}}" class="cu-item">
+    <view class="cu-card article {{isCard?'no-card':''}}">
+        <view class="cu-item padding-top-lg shadow">
+            <view class="content">
+                <image src="{{item.image}}" mode="aspectFill"></image>
+                <view class="desc">
+                    <view class="text-content">{{item.title}}</view>
+                    <view>
+                        <view class="cu-tag bg-red light sm round">{{item.dept}}</view>
+                      <!--   <view class="cu-tag bg-green light sm round">{{item.date}}</view> -->
+                    </view>
+                </view>
             </view>
-        </navigator>
-
+        </view>
     </view>
-    <view class='cu-tabbar-height'></view>
-</scroll-view>
+</navigator>
+
+
+    <view class="cu-tabbar-height"></view>

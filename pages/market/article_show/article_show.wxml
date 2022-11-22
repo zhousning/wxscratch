@@ -18,11 +18,11 @@
     </view>
 
     <view class="padding flex justify-center">
-        <image style="width:100%;" mode="widthFix" src="/images/gykgwx.jpg" >
+        <image style="width:100%;" mode="widthFix" src="{{article_qrcode}}" >
        </image>
     </view>
 
     <view class='cu-tabbar-height padding bg-gray  text-center'>
-        <text >厚德为公 惠泽民生</text>
+        <text >每个孩子健康快乐成长</text>
     </view>
 </scroll-view>

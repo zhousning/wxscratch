@@ -1,5 +1,4 @@
 const app = getApp()
-const config = require('../../libs/config')
 
 Page({
     data: {
@@ -25,4 +24,8 @@ Page({
             })
         }
     },
+    onShareAppMessage: function () {
+        return app.createShareMessage();
+    }
+    
 })

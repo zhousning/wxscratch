@@ -34,6 +34,7 @@ Component({
             articles.push({
               url: '/pages/market/article_show/article_show?article_id=' + objs[i].id,
               title: objs[i].title,
+              image: app.globalData.config.routes.nhost + objs[i].image,
               dept: objs[i].dept,
               date: objs[i].article_date,
             })

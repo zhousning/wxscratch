@@ -14,5 +14,8 @@ Page({
         that.setData({
             article_url: article_url
         })
+    },
+    onShareAppMessage: function () {
+        return app.createShareMessage();
     }
 })

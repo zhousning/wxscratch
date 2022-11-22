@@ -6,6 +6,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        article_qrcode: '/images/gykgwx.png',
         article: {},
     },
 
@@ -16,8 +17,11 @@ Page({
         wx.showLoading({
             title: '数据加载中',
         })
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         var that = this;
-        var openid = wx.getStorageSync('openId');
         var article_id = options.article_id
 
         wx.request({
@@ -28,16 +32,18 @@ Page({
             },
             data: {
                 id: article_id,
-                openid: openid
             },
             success: function (res) {
                 var obj = res.data;
                 var article = {};
+                article['id'] = article_id
                 article['title'] = obj.title
                 article['dept'] = obj.dept
                 article['date'] = obj.article_date
                 article['content'] = obj.content
+                article['image'] = obj.image
                 that.setData({
+                    article_qrcode: app.globalData.config.routes.host + 'article_qrcode.jpg',
                     article: article
                 })
                 wx.hideLoading();
@@ -47,4 +53,17 @@ Page({
             }
         })
     },
+    onShareAppMessage: function () {
+        return app.createShareMessage();
+    },
+    onShareTimeline: function() {
+        var article = this.data.article
+        return {
+            title: article.title,
+            query: {
+                id: article.id
+            },
+            imageUrl: app.globalData.config.routes.host + article.image
+        };
+    }
 })
